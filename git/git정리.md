@@ -120,3 +120,109 @@ local에서 수정사항 발생 시 github lab.ssafy 모두에 push 해야 함(�
 - 오픈소스 프로젝트에 기여
 
 [네이버는 레벨2 권장](https://d2.naver.com/news/3435170)
+
+> README.md 파일이란?
+> - 프로젝트 설명, 사용 방법 등 문서화된 정보 포함
+> - .git/과 같은 위치에 있어야 함
+
+
+### git 기타 명령어
+- `git remove -v`
+    - 현재 로컬 저장소에 등록된 원격 저장소 목록 보기
+- `git remote rm 원격_저장소_이름`
+    - 현재 로컬 저장소에 등록된 원격 저장소 삭제
+    - 예) `git remote rm origin` : origin 원격 저장소 삭제
+
+## git revert
+-  특정 commit을 없었던 일로 만드는 작업 (변경이력 취소)
+- 이전의 commit을 취소시키고 commit을 취소한 결과를 새로운 commit으로 남김 (재설정)
+
+`git revert <commit_id>` : 해당 ID의 commit 취소
+- revert 전
+![revert 전](image.png)
+- revert 후
+![revert 후](image-1.png)
+
+- 변경 사항을 안전하게 실행 취소할 수 있도록 도와주는 순방향 실행 취소 작업
+- commit 기록에서 commit을 삭제하거나 분리하는 대신, ㅈ정된 변경 사항을 반전시키는 새 commit을 생성
+- git에서 기록이 손실되는 것을 방지하며 기록의 무결성과 협업의 신뢰성을 높임
+
+
+`git revert commit_id1 commit_id2 commit_id3` : 여러개 한 번에  revert\
+`git revert commit_id1..commit_idn` : 연속된 여러개의 commit 한번에 revert\
+`git revert --no-edit commit_id` : commit 메시지 작성을 위한 편집기를 열지 않음(자동으로 commit 진행)\
+`git revert --no-commit commit_id`: 자동으로 commit 하지 않고 SA에만 올림
+
+## git reset
+> 특정 commit으로 되돌아가는 작업
+
+`git reset [옵션] <commit_id>`
+
+- 과거 시점으로 되돌아가는 작동 원리
+- 특정 commit으로 되돌아갔을 때, 되돌아간 commit 이후의 commit은 모두 삭제
+
+### reset의 3가지 옵션
+1. `--soft` : 삭제한 commit의 기록을 staging area에 남김
+    - reset 이전 :
+    ![before reset --soft](image-2.png)
+    - reset 이후 :
+    ![after reset --soft](image-3.png)
+        - `git log`시 first 커밋만 남아있음
+        - staging area에 2.txt, 3.txt가 남아있음
+2. `--mixed` : 삭제된 commit의 기록을 working directory에 남김(기본 옵션)
+    - reset 이전 :
+    ![before reset --mixed](image-4.png)
+    - reset 이후 :
+    ![after reset --mixed](image-5.png)
+        - `git status`시 working directory에 
+        - `git log`시 first로
+3. `--hard` : 삭제된 commit의 기록을 남기지 않음 (통째로 버리기)
+    - reset 이후 : ![after git reset --hard](image-6.png)
+    - ![files](image-7.png)
+        - mixed, soft와 달리 파일 자체가 wd에서 삭제됨
+
+
+> `git reflog` : HEAD가 이전에 가리켰던 모든 commit 보여줌
+
+> 지워진 commit도 reflog로 조회하여 복구 가능
+![git reflog](image-8.png)
+![alt text](image-9.png)
+
+- remote repo에 파일이 남아있다면 local repo에서 reset 하고 push 해도 remote repo로부터 pull 받으라는 메시지가 뜸 (싱크를 맞춰야 하기 때문)
+    - **이 때 `git push -f`로 강제로 push 가능**
+
+
+
+## 파일 내용을 modified 전으로 되돌리기
+
+이미 커밋한 파일(?) 수정 후 저장했는데 가장 최근 커밋한 상태로 되돌리고 싶다?
+
+`git restore` : WD의 파일을 수정 전으로 되돌림(?)
+- git에서 관리되고 있는(한 번이라도 commit 찍힌) 파일을 대상으로 함
+- 작업한거 다 날라갈 수도...
+
+`git stash` : 
+- `git stash apply`하면 다시 복구 가능
+
+## Staging area에 올라간 파일을 Unstage하기
+1. `git rm --cached`
+    - commit이 없는 경우(새 파일인 경우)
+    - staging area에 올라간 해당 파일을 추적 대상에서 삭제
+    - 명령어 실행 시 WD로 이동(untracked file)
+        - 주의 : `--cached` 붙이지 않으면 파일 자체 삭제
+    - 예시) 이미 commit까지 찍힌 파일을 더 이상 추적하고 싶지 않을 때 사용 가능
+        - 이후 .gitignore에 등록하여 추적대상에서 제외 가능
+2. `git restore --staged`
+    - git 저장소에 commit이 존재하는 경우
+
+
+
+>> 추적을 시작하는 시점이 언제?
+- commit 한 이후(staging area는 추적 대상 후보군)
+- 하지만 staging area의 파일이 올라가면 추적 후보가 되기 때문에 .gitignore 의 경우 먹히지 않을 수 있음
+--> .gitignore는 꼭!!! git init 직후에..
+
+>> 같은 로컬 레포에서 레포A에는 파일 1,2,3을, 레포B에는 파일 1,2만을 올리고 싶다면?
+- 각각 다른 파일을 SA에 올리고 push하게 되면 버전이 꼬일 수 있다
+- 따라서 레포A용 브랜치와 레포B용 브랜치를 따로 파는 게 좋음
+    - 그렇다면 .git 파일은 두개 생기는건가요?
