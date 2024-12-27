@@ -12,8 +12,11 @@
     - MongoDB
     - RabbitMQ
     - 등등..
+<br>
 
 직접적으로 프론트와 연결해서 사용하는  NoSQL도 꽤 존재한다.
+
+<br>
 
 ### NoSQL이란?
 
@@ -27,6 +30,8 @@
     - 특정 패턴에 최적화
     - 읽기와 쓰기 성능 자체가 좋다.
 - 실시간 데이터 관리, 클라우드 보안, 고가용성 애플리케이션에 사용
+
+<br>
 
 **NoSQL의 장점**
 
@@ -47,6 +52,8 @@
     - MongoDB와 같은 경우 json 형태의 문서를 저장하고 조회할 수 있는 API 기능 제공
     - Redis는 캐싱이라는 임베디드 메모리를 이용한 데이터 처리 기능 제공 → 빠른 응답속도
 
+<br>
+
 ### NoSQL vs RDBMS
 **각각의 방식이 특정 용도에 따라 최적화되어있음**
 - document
@@ -61,7 +68,7 @@
   - id와 column1, column2... 의 테테이블 구조
   - 스키마에 따라 데이터를 저장해야 함
 
-
+<br>
 
 ### 사용사례
 
@@ -85,6 +92,9 @@ X(트위터): 카산드라(column-family)로 매일 테라바이트 용량의 �
 
 아마존: DynomoDB 완전 관리형 NoSQL, AWS 플랫폼에서도 사용 가능
 ```
+
+<br>
+
 ### 집합 지향(Aggregate orientation)
 
 - 데이터를 집합(aggregate) 단위로 구성하고 관리하는 데이터 모델링 접근방식
@@ -97,9 +107,9 @@ X(트위터): 카산드라(column-family)로 매일 테라바이트 용량의 �
   - NoSQL은 연관성 있는 데이터를 집합이라는 단위로 모아서 저장
     - 예) 하나의 문서로 묶여있음. id 값을 키로 사용해서 모든 주문정보 등을 집합(document 단위)으로 관리
 
+<br>
 
-
-**집합의 경계를 어떻게 결정해야 하는가가?**
+**집합의 경계를 어떻게 결정해야 하는가?**
 ```
 고객 정보 주문 정보 별도로 저장 → 고객이라는는 큰 정보 안에 주문 정보가 포함
 
@@ -111,6 +121,8 @@ X(트위터): 카산드라(column-family)로 매일 테라바이트 용량의 �
 
 따라서 주의해야 한다. 그리고 개발자 역량과 상황에 따라서 집합의 경계를 만들면 된다.
 ```
+
+<br>
 
 ### Key-Value Database
 
@@ -125,6 +137,8 @@ X(트위터): 카산드라(column-family)로 매일 테라바이트 용량의 �
         - 즉, 값에 어떤 형태의 데이터든 넣을 숫 있다.
         - JSON, XML, 바이너리 데이터 등 포함
     - 캐싱 시스템, 실시간 애플리케이션, IoT 데이터 저장 등 단순한 데이터 저장 및 조회
+
+<br>
 
 ### Document-Oriented Database
 
@@ -144,18 +158,24 @@ X(트위터): 카산드라(column-family)로 매일 테라바이트 용량의 �
     - 각각의 필드나 내용 구성이 다른 경우
     - 제품정보, 리뷰, 블로그, 뉴스 아티클 등
 
+<br>
+
 **Key-Value Database와 Document-Oriented Database의 차이**
 
 - 키밸류는 단순하고 직접적인 접근만 가능. JSON형태로 저장해서 해도 되지만. 쿼리문을 통한 질의로 밸류 내부 세부조회는 불가능
 
 - 문서는 문서 구조가 계층적이고 북잡. 가격 만원 이상 서울에 있는 상품 ⇒ 특정 필드를 검색하거나 복잡한 쿼리 가능
 
+<br>
+
 **Document-Oriented Database와 RDBMS의 차이**
 
 - Document-Oriented: 스키마에 대한 검증 필요 X
 - RDBMS는 중복 자체를 허용하지 않는 반면, Document-Oriented는 일관성이 깨질 염려가 있다.
 
-<aside>
+<br>
+
+```
 💡
 
 제약조건이나 트랜잭션이 상당히 많이 개선됐지만
@@ -164,7 +184,9 @@ X(트위터): 카산드라(column-family)로 매일 테라바이트 용량의 �
 
 일관성이 중요하다면 차라리 RDBMS가 낫다.(은행처럼)
 
-</aside>
+```
+
+<br>
 
 ### Column-Family Database
 
@@ -178,9 +200,11 @@ X(트위터): 카산드라(column-family)로 매일 테라바이트 용량의 �
 - cassandra, ScyllaDB, HBase 등
 - 거대 클러스터를 통해 처리 가능한 DB
 - 클러스터가 많을수록 처리량은 뛰어나지만 응답속도, 레이턴시, 네트워크 통신 필요하므로 결과적으로는 응답속도가 길어질 수 있음
-- 사용자 행동 로그 및 이벤트 데이터 저장, IoT 데이터 등에 주로 용
+- 사용자 행동 로그 및 이벤트 데이터 저장, IoT 데이터 등에 주로 사사용
 
-**공통점**
+<br>
+
+**NoSQL의 공통점**
 - 스키마리스
     - 고정된 스키마 요구 X, 데이터 구조 유연
     - 데이터의 형태가 자주 변경되거나 다양한 구조를 처리할 때 적합
@@ -192,8 +216,9 @@ X(트위터): 카산드라(column-family)로 매일 테라바이트 용량의 �
 - 분산 아키텍처
     - 데이터를 여러 서버에 복제하고 분산 저장
     - 하나의 서버에서 문제가 생기는 경우에도 전체 시스템에서는 제대로 동작하게끔 할 수 있다.(장애시 여러 노드에서 데이터 접근 가능) → 고가용성
-    - 지리적으로 떨어진 지역에서도 해당 데이터를 가져와서 사용 가능
-    - → 내결함성 보장
+    - 지리적으로 떨어진 지역에서도 해당 데이터를 가져와서 사용 가능 → 내결함성 보장
+
+<br>
 
 ## Firebase
 
@@ -209,7 +234,9 @@ X(트위터): 카산드라(column-family)로 매일 테라바이트 용량의 �
 
 - 모니터링도 지원, 사용자 분석 앱 테스트 등 지원
 
-### 무엇을 지원하나?
+<br>
+
+**무엇을 지원하나?**
 
 1. 앱개발(백엔드)
     - 가입 인증
@@ -224,7 +251,9 @@ X(트위터): 카산드라(column-family)로 매일 테라바이트 용량의 �
     - 사용자 성향이나 이용 분석 도구
     - 앱에서 클라우드 메시지 푸시 fcm
 
-### 주요기능
+<br>
+
+**주요기능**
 
 - 서버리스 백엔드 플랫폼
     - 별도 서버 구축(구현) 없이 DB, 인증, API 등 제공
@@ -237,47 +266,54 @@ X(트위터): 카산드라(column-family)로 매일 테라바이트 용량의 �
     - 앱 사용성, 충돌 보고서, 사용자 행동 등을 추적하고 분석하는 기능 제공
     - 서비스 개선에 많은 도움이 된다.
 
+<br>
+
 ### 초기 설정
 
 1. Firebase 콘솔 접속(firebase.google.com)
 2. 프로젝트 생성
     - 가능하면 고유한 프로젝트 명 → 호스팅 시 도메인 네임을 깔끔하게 진행 가능
-    - 개발 단계에서는 분석이 큰 의미가 없고, 불필요한 로그만 쌓인다 → google 애널리틱스 일단 비활성화. 나중에 다시 켤 수 있음
+    - 개발 단계에서는 분석이 큰 의미가 없고, 불필요한 로그만 쌓인다.
+      - → google 애널리틱스 일단 비활성화(나중에 다시 켤 수 있음)
 3. 데이터베이스 생성(Firestore)
-    - 왼쪽 탭 빌드 - Firestore Database
-    - 서버 위치정보는 응답속도나 법적인 문제와 관련해서 국로 설정하는 게 차후 유지보수에 유리(나중에 변경 불가)
+    - 왼쪽 탭 - 빌드 - Firestore Database
+    - 서버 위치정보는 응답속도나 법적인 문제와 관련해서 국내내로 설정하는 게 차후 유지보수에 유리(나중에 변경 불가)
     - 프로덕션 모드에서 시작(모든 읽기 쓰기 차단되는 모드 → 보안 규칙 직접 설정해줘야 데이터에 접근 가능)
 4. 컬렉션 생성
-    1. 컬렉션은 document들을 저장하는 폴더 개념
-    2. 컬렉션 ID는 명확하게 정의할 것
+    - 컬렉션은 document들을 저장하는 폴더 개념
+    - 컬렉션 ID는 명확하게 정의할 것
 5. Vue 설정(Firebase SDK)
-    1. SDK: software development kit
-    2. firebase와 통신하는데 필요한 모든 도구가 담겨있는 키트
-    3. 웹 앱과 firebase 연결다리
+    - SDK: software development kit
+    - firebase와 통신하는데 필요한 모든 도구가 담겨있는 키트
+    - 웹 앱과 firebase 연결다리
         
-        ![image.png](image%203.png)
+        ![image.png](image.png)
         
-    4. 웹 앱을 추가하여 시작하기
-    5. npm install firebase vuefire
-        1. 의존성 → firebase 10으로 다운그레이드
-        2. env에 firebaseConfig 관련 데이터 따로 저장
+    1. 웹 앱을 추가하여 시작하기
+    2. npm install firebase vuefire
+        - 의존성 문제 → firebase 버전 10으로 다운그레이드
+        - env에 firebaseConfig 관련 데이터 따로 저장
+
+<br>
 
 **FirestoreDB vs Realtime DB**
 
 - Cloud Firestore는 권장되는 엔터프라이즈급 JSON 호환 문서 데이터베이스
     - 성능, 추가 기능 상 권장
-- Realtime Database는 기존 Firebase
+- Realtime Database는 기본 Firebase JSON 데이터베이스
+  - 간단한 조회와 확장성이 제한적이며 지연 시간이 짧은 동기화가 필요한 단순한 데이터 모델을 사용하는 애플리케이션에 적합함
 
+<br>
 
 ### Firebase에서 데이터 가져오기
 
 1. vue 프로젝트와 firebase 데이터베이스 포맷 통일
-    1. src/views/HomePages.vue
+   - `src/views/HomePages.vue`의 필드와 동일하게 Firebase 데이터베이스 필드 설정
 2. 컬렉션 가져오기
-    1. 컬렉션을 가져오기 윟나 코드 가져오기(여러 문서 가져오기 - db명 변경: ssafy-cafe)
-    2. db 변수 없다? 데이터 베이스를 사용하기 위한 db 변수 정의
-    3. 원래 firebaseApp으로 불러와야 하지만 useFirestore를 통해 편리하게 이용 가능
-    4. [https://firebase.google.com/docs/firestore/query-data/](https://firebase.google.com/docs/firestore/query-data/get-data?hl=ko&_gl=1*1mp99f2*_up*MQ)
+    - 컬렉션을 가져오기 위한한 코드 가져오기(여러 문서 가져오기 - db명 변경: ssafy-cafe)
+    - 데이터 베이스를 사용하기 위한 db 변수 정의
+    - 원래 `firebaseApp`으로 불러와야 하지만 `useFirestore`를 통해 편리하게 이용 가능
+    - [https://firebase.google.com/docs/firestore/query-data/](https://firebase.google.com/docs/firestore/query-data/get-data?hl=ko&_gl=1*1mp99f2*_up*MQ)
     
     ```jsx
     import { useFirestore } from 'vuefire'
@@ -293,8 +329,8 @@ X(트위터): 카산드라(column-family)로 매일 테라바이트 용량의 �
     
     ```
     
-    1. 이후 진행하면 permission이 부족하다?
-    2. firebase 데이터베이스 - 규칙 - 권한작성 - 콘솔출력확인
+    - 이후 진행하면 permission이 부족하다고 뜰 것이다.
+    - firebase 데이터베이스 - 규칙 - 권한작성 - 콘솔출력확인
         
         ```jsx
         import { collection, query, where, getDocs } from "firebase/firestore";
@@ -309,7 +345,7 @@ X(트위터): 카산드라(column-family)로 매일 테라바이트 용량의 �
         ```
         
     
-    컬렉션 데이터를 반응형 변수에 넣기. 기존의 cafeCollection은 삭제.
+    - 컬렉션 데이터를 반응형 변수에 넣기. 기존의 `cafeCollection`은 삭제.
     
     ```jsx
     const cafeCollection = ref([])
@@ -324,8 +360,8 @@ X(트위터): 카산드라(column-family)로 매일 테라바이트 용량의 �
 3. 데이터베이스 실시간으로 불러오기
     - firebase 문서를 수정해도 페이지에는 자동 반영 X
         - 실시간 데이터 동기화가 진행되지 않았기 때문
-        - onSnapshot 설정 필요
-        - DB 업데이트 될 때마다 콜백함수 실행 → 계속 추가되는 불상사
+        - `onSnapshot` 설정 필요
+        - DB 업데이트 될 때마다 콜백함수 실행 → 계속 추가되는 불상사가 발생할 수 있다!
         - 초기에 배열 초기화 필요
         
         ```jsx
@@ -351,7 +387,7 @@ X(트위터): 카산드라(column-family)로 매일 테라바이트 용량의 �
         // });
         ```
         
-        - 코드 간단하게 다듬기 →  useCollection
+        - 코드 간단하게 다듬기 →  `useCollection`
         
         ```jsx
         import { useFirestore, useCollection } from 'vuefire'
@@ -375,16 +411,21 @@ X(트위터): 카산드라(column-family)로 매일 테라바이트 용량의 �
         // });
         ```
         
+<br>
 
 ### Firebase에 데이터 추가하기
 
 1. 문서추가를 위한 메서드 호출
-    - setDoc 또는 addDoc 활용
-      - setDoc: 문서를 생성할 때 id 지정
-      - addDoc: 문서 생성 시 자동으로 id 생성(시간+랜덤 ⇒ 고유 id, 즉 시간순으로 정렬 가능)
-      - 체계적으로 id 관리하고 싶다면 setDoc, 단순히 문서 추가하고 싶다면 addDoc
-    - addDoc 사용하기
-        - addDoc은 비동기함수이므로 await 사용
+   
+    - `setDoc` 또는 `addDoc` 활용
+      - `setDoc`: 문서를 생성할 때 id 지정
+      - `addDoc`: 문서 생성 시 자동으로 id 생성(시간+랜덤 ⇒ 고유 id, 즉 시간순으로 정렬 가능)
+      - 체계적으로 id 관리하고 싶다면 `setDoc`, 단순히 문서 추가하고 싶다면 `addDoc`
+
+      <br>
+
+    - `addDoc` 사용하기
+        - addDoc은 비동기함수이므로 `await` 사용
         - 객체 선언 → 고유 id 생성해서 문서 추가
         
         ```jsx
@@ -411,11 +452,15 @@ X(트위터): 카산드라(column-family)로 매일 테라바이트 용량의 �
         
         export default router
         ```
+        
+        <br>
 
         - 네비게이션 바에 추가
         ```html
         <v-btn to="/new">NEW</v-btn>
         ```
+
+        <br>
 
         - NewCafePage- addcafe 수정
         ```jsx
@@ -437,6 +482,9 @@ X(트위터): 카산드라(column-family)로 매일 테라바이트 용량의 �
           console.log("Document written with ID: ", docRef.id);
         }
         ```
+
+        <br>
+
         - 추가시 홈으로 돌아오는 라우터 설정
         ```jsx
         import { ref } from 'vue'
@@ -467,11 +515,12 @@ X(트위터): 카산드라(column-family)로 매일 테라바이트 용량의 �
         }
         ```
         
+<br>
 
 ### 데이터 수정하기
 
 1. 수정버튼 활성화
-    1. 수정페이지 연결
+    - 수정페이지 연결
         
         ```html
         <!-- CafeCard.vue -->
@@ -490,13 +539,10 @@ X(트위터): 카산드라(column-family)로 매일 테라바이트 용량의 �
         }
         ```
 
+<br>
+
 2. 수정할 데이터 가져오기
     - doc 메서드 통해 데이터 불러오기
-        - doc: 해당 db의 해당 id를 가진 문서를 참조하라는 뜻뜻
-        - 포인터같은 개념
-        - 가지고 온것은 아닌데 빠르게 참조하기 위해 생성된 객체
-        - 비동기 네트워크 통신에서 진행되므로 await 키워드 사용용
-        
         ```jsx
         import { ref } from 'vue'
         import { useRouter, useRoute } from 'vue-router'
@@ -524,11 +570,14 @@ X(트위터): 카산드라(column-family)로 매일 테라바이트 용량의 �
           console.log(cafe.value)
         }
         ```
-    - watch를 통해 불러온 데이터를 반응형 변수에 넣어주기   
-        - useDocument 사용 시 쉽게 가져올 수 있음
-        - 읽기 전용 반응형 객체이므로 자동으로 바뀌도록 설정
-        - 읽기 전용이므로 수정하기가 어려움 → 외부적으로 사용해서 바뀔 때마다 watch로 감시, 바뀌면 cafe 데이터를 같이 변경
+        - doc: 해당 db의 해당 id를 가진 문서를 참조하라는 뜻뜻
+        - 포인터같은 개념
+        - 가지고 온것은 아닌데 빠르게 참조하기 위해 생성된 객체
+        - 비동기 네트워크 통신에서 진행되므로 await 키워드 사용용
         
+    <br>
+
+    - `watch`를 통해 불러온 데이터를 반응형 변수에 넣어주기   
         ```jsx
         import { ref, watch } from 'vue'
         import { useRouter, useRoute } from 'vue-router'
@@ -559,10 +608,15 @@ X(트위터): 카산드라(column-family)로 매일 테라바이트 용량의 �
         //   console.log(cafe.value)
         // }
         ```
+        - `useDocument` 사용 시 쉽게 가져올 수 있음
+        - 읽기 전용 반응형 객체이므로 자동으로 바뀌도록 설정
+        - 읽기 전용이므로 수정하기가 어려움 → 외부적으로 사용해서 바뀔 때마다 watch로 감시, 바뀌면 cafe 데이터를 같이 변경
+        
+<br>
       
 3. 가져온 데이터 수정
-    1. updateDoc
-    2. 마찬가지로 비동기이므로 await, async 사용해서 동기식으로 작동하도록 코드 작성
+    - `updateDoc` 메서드 사용용
+    - 마찬가지로 비동기이므로 await, async 사용해서 동기식으로 작동하도록 코드 작성
     
     ```jsx
     import { ref, watch } from 'vue'
@@ -598,6 +652,7 @@ X(트위터): 카산드라(column-family)로 매일 테라바이트 용량의 �
     }
     ```
     
+<br>
 
 ### 데이터 삭제
 
@@ -606,12 +661,12 @@ X(트위터): 카산드라(column-family)로 매일 테라바이트 용량의 �
     
     ```html
     <v-btn color="error" text @click="deleteCafe">
-            <v-icon icon="mdi-trash-can-outline" class="mr-1" />
-            삭제
-          </v-bt
+      <v-icon icon="mdi-trash-can-outline" class="mr-1" />
+      삭제
+    </v-btn>
     ```
     
-2. deleteDoc 호출
+2. `deleteDoc` 호출
     
     ```jsx
     import { computed } from 'vue'
@@ -626,12 +681,15 @@ X(트위터): 카산드라(column-family)로 매일 테라바이트 용량의 �
     }
     ```
     
+<br>
 
-### firebase 인증
+### Firebase 인증
 
 - 사용자인증/관리 기능을 서버 측 코드 없이 유지 관리가 가능하게 하는 firebase 서비스 중 하나
 - 데이터를 다루는 환경? 보안이 중요하다. 대규모의 앱에서는 더더욱!
 - 빌드 - Authentication 에서 설정 가능능
+
+<br>
 
 **사용자 인증이란?**
 
@@ -641,13 +699,18 @@ X(트위터): 카산드라(column-family)로 매일 테라바이트 용량의 �
 
   → Firebase를 통해 소셜로그인 등 비밀번호 없는 로그인 기능 구현 가능
 
+<br>
+
 1. Firebase Auth 활성화
     - 로그인 방법 선택 → 이메일/비밀번호
         - 소셜로그인도 추가적으로 제공
     - 사용 설정 토글버튼 활성화
         - firebase의 SDK 덕분에 기능을 구현할 필요 없다!!
+
+<br>
+
 2. VueFire를 통한 Auth 설정
-    - VueFireAuth 가져오기
+    - `VueFireAuth` 가져오기
         
         ```jsx
         // main.js
@@ -662,8 +725,11 @@ X(트위터): 카산드라(column-family)로 매일 테라바이트 용량의 �
         })
         ```
         
+<br>
+
 3. 사용자 등록하기(비밀번호 기반 계정 만들기)
-    1. 회원가입을 위한 route 추가
+
+    - 회원가입을 위한 route 추가
         
         ```jsx
         // router/index.js
@@ -686,8 +752,10 @@ X(트위터): 카산드라(column-family)로 매일 테라바이트 용량의 �
         </nav>
         
         ```
-        
-    2. useFireAuth 객체 불러오기/newUser 변수 정의
+    
+    <br>
+
+    - useFireAuth 객체 불러오기/newUser 변수 정의
         
         ```jsx
         // SignInPage.vue
@@ -704,8 +772,10 @@ X(트위터): 카산드라(column-family)로 매일 테라바이트 용량의 �
         
         const auth = useFirebaseAuth()
         ```
-        
-    3. createUser 메서드 연결하기
+    
+    <br>
+
+    - `createUser` 메서드 연결하기
         
         ```html
         <!-- SignInPage.vue - <script> -->
@@ -736,8 +806,10 @@ X(트위터): 카산드라(column-family)로 매일 테라바이트 용량의 �
         }
         ```
         
+<br>
+
 4. 사용자 인증 여부에 따른 버튼 변경
-    1. 유저 정보 가져오기
+    - 유저 정보 가져오기
         
         ```jsx
         // AppNavbar.vue - <script>
@@ -757,9 +829,11 @@ X(트위터): 카산드라(column-family)로 매일 테라바이트 용량의 �
           <v-btn v-else to="/signin">SIGN IN</v-btn>
         </nav>
         ```
-        
+
+<br>
+
 5. 로그인/로그아웃 기능 구현
-    1. signOut을 호출하여 로그아웃 하기
+    - signOut을 호출하여 로그아웃 하기
         
         ```jsx
         // AppNavbar.vue - <script>
@@ -781,8 +855,10 @@ X(트위터): 카산드라(column-family)로 매일 테라바이트 용량의 �
             })
         }
         ```
-        
-    2. 로그인 구현하기
+    
+    <br>
+
+    - 로그인 구현하기
         
         ```jsx
         // SignInPage.vue - <script>
