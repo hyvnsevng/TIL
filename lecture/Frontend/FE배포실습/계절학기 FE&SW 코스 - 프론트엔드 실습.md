@@ -307,13 +307,18 @@ X(트위터): 카산드라(column-family)로 매일 테라바이트 용량의 �
 
 ### Firebase에서 데이터 가져오기
 
+<br>
+
 1. vue 프로젝트와 firebase 데이터베이스 포맷 통일
    - `src/views/HomePages.vue`의 필드와 동일하게 Firebase 데이터베이스 필드 설정
+
+<br>
+
 2. 컬렉션 가져오기
     - 컬렉션을 가져오기 위한한 코드 가져오기(여러 문서 가져오기 - db명 변경: ssafy-cafe)
     - 데이터 베이스를 사용하기 위한 db 변수 정의
     - 원래 `firebaseApp`으로 불러와야 하지만 `useFirestore`를 통해 편리하게 이용 가능
-    - [https://firebase.google.com/docs/firestore/query-data/](https://firebase.google.com/docs/firestore/query-data/get-data?hl=ko&_gl=1*1mp99f2*_up*MQ)
+      - 참고: [https://firebase.google.com/docs/firestore/query-data/](https://firebase.google.com/docs/firestore/query-data/get-data?hl=ko&_gl=1*1mp99f2*_up*MQ)
     
     ```jsx
     import { useFirestore } from 'vuefire'
@@ -328,6 +333,8 @@ X(트위터): 카산드라(column-family)로 매일 테라바이트 용량의 �
     });
     
     ```
+
+    <br>
     
     - 이후 진행하면 permission이 부족하다고 뜰 것이다.
     - firebase 데이터베이스 - 규칙 - 권한작성 - 콘솔출력확인
@@ -343,26 +350,27 @@ X(트위터): 카산드라(column-family)로 매일 테라바이트 용량의 �
           console.log(doc.id, " => ", doc.data());
         });
         ```
-        
+
+    <br>    
     
     - 컬렉션 데이터를 반응형 변수에 넣기. 기존의 `cafeCollection`은 삭제.
     
-    ```jsx
-    const cafeCollection = ref([])
-    
-    querySnapshot.forEach((doc) => {
-      // doc.data() is never undefined for query doc snapshots
-      console.log(doc.id, " => ", doc.data());
-      cafeCollection.value.push(doc.data());
-    });
-    ```
+      ```jsx
+      const cafeCollection = ref([])
+      
+      querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        console.log(doc.id, " => ", doc.data());
+        cafeCollection.value.push(doc.data());
+      });
+      ```
     
 3. 데이터베이스 실시간으로 불러오기
     - firebase 문서를 수정해도 페이지에는 자동 반영 X
         - 실시간 데이터 동기화가 진행되지 않았기 때문
         - `onSnapshot` 설정 필요
-        - DB 업데이트 될 때마다 콜백함수 실행 → 계속 추가되는 불상사가 발생할 수 있다!
-        - 초기에 배열 초기화 필요
+        - DB 업데이트 될 때마다 콜백함수 실행 → 계속 같은 데이터가가 추가되는 불상사가 발생할 수 있다!
+        - 따라서 초기에 배열 초기화 필요
         
         ```jsx
         import { collection, query, where, onSnapshot } from "firebase/firestore";
@@ -386,6 +394,8 @@ X(트위터): 카산드라(column-family)로 매일 테라바이트 용량의 �
         //   cafeCollection.value.push(doc.data());
         // });
         ```
+        
+        <br>
         
         - 코드 간단하게 다듬기 →  `useCollection`
         
