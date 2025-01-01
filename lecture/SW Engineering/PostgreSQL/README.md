@@ -56,7 +56,7 @@
     - Owned by 에 TBL_USER 와 user_seq를 binding 시키면 해당 테이블의 열이 삭제될 경우 이 시퀀스도 같이 삭제됨
   - Save 후 생성된 sequence 확인
 
-### Query Tool에서 다양한 Query 작성해보기
+## Query Tool에서 다양한 Query 작성해보기
 - `"Schema명"."객체명"`으로 객체 접근
 - Query Tool 생성
 - Database 우클릭 후 Query Tool 선택
@@ -73,8 +73,12 @@
   INSERT INTO "PRJ1"."TBL_USER"(user.seq, user_id, user_name, user_pass, user_level)
   VALUES(NEXTVAL("PRJ1"."SEQ_USER"), 'id1', '사용자이름1', 'pass', '1');
   ```
-  
 
 
+## Database 백업하기
+- Database 우클릭 후 Backup 선택
+  - `Utility Not Found`오류 발생 시 https://while1.tistory.com/66 참고
+- Backup 실행
+  - 파일 경로 및 Format(Plain), Encoding(EUC_KR) 설정
 
 
