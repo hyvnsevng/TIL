@@ -71,8 +71,11 @@
 - `TBL_USER` 테이블에 Sequence를 이용해 Data Insert
   ```sql
   INSERT INTO "PRJ1"."TBL_USER"(user.seq, user_id, user_name, user_pass, user_level)
-  VALUES(NEXTVAL("PRJ1"."SEQ_USER"), 'id1', '사용자이름1', 'pass', '1');
+  VALUES(NEXTVAL('"PRJ1"."SEQ_USER"'), 'id1', '사용자이름1', 'pass', '1');
   ```
+  - `NEXTVAL`의 인자는 string literal이어야 하므로, `''`로 감싸서 전달한다.
+    - `"PRJ1"."SEQ_USER"` (X)
+    - `'"PRJ1"."SEQ_USER"'` (O)
 
 
 ## Database 백업하기
